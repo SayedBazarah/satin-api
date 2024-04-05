@@ -2,7 +2,7 @@ import { NextFunction, Request, Response, Router } from "express";
 
 import * as controllers from "../controllers/employees";
 import * as val from "../validators/employee";
-import { uploadEmployeeResourses } from "../utils/multer";
+import { globalUploadMiddleware } from "../middleware/global-upload.middleware";
 
 const router = Router();
 
@@ -12,7 +12,8 @@ router
   .route("/")
   .get(val.tokenValidator, controllers.AllEmployeesHandler)
   .patch(
-    uploadEmployeeResourses.single("profileImage"),
+    globalUploadMiddleware().single("profileImage"),
+    val.update,
     controllers.UpdateEmployee
   )
   .delete(val.deleteEmployees, controllers.DeleteEmployees);
@@ -23,17 +24,13 @@ router.route("/ids").get(val.tokenValidator, controllers.AllEmployeesIdHandler);
 
 router.route("/single/:id").get(val.me, controllers.GetEmployee);
 
-router.route("/create").post(
-  (req: Request, res: Response, next: NextFunction) => {
-    console.log("req.body -----------------");
-    console.log(req.body);
-    next();
-  },
-  uploadEmployeeResourses.single("profileImage"),
-
-  val.signup,
-  controllers.SignupHandler
-);
+router
+  .route("/create")
+  .post(
+    globalUploadMiddleware().single("profileImage"),
+    val.signup,
+    controllers.SignupHandler
+  );
 
 router
   .route("/forgot-password")

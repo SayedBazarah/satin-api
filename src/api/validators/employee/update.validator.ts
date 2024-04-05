@@ -13,7 +13,6 @@ export const update = [
   body("name").optional().isString(),
   body("email").optional().isString(),
   body("phone").optional().isString(),
-  body("profileImage").optional(),
   body("state").optional().isString(),
   body("area").optional().isString(),
   body("isOnline").optional().isBoolean(),

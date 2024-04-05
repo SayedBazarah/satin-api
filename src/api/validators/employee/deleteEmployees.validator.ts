@@ -1,9 +1,8 @@
-import { body, header, param } from "express-validator";
-
+import { body, header } from "express-validator";
 import { globalValidatorMiddleware } from "../../middleware/globalValidator.middleware";
 
-export const deleteRole = [
+export const deleteEmployees = [
   header("authorization").exists().withMessage("Access token required"),
-  param("id"),
+  body("employees").isArray(),
   globalValidatorMiddleware,
 ];

@@ -5,10 +5,13 @@ import { hashPwd } from "../../utils/bcrypt";
 import { generateCode } from "../../utils/crypto";
 import { sendMail } from "../../utils/mail";
 import { forgetPasswordTemplate } from "../../utils/emailTemplates";
+import { removeFiles, saveFiles } from "../../utils/file";
+import { BadRequestError } from "../../errors/bad-request-error";
 
 export const SignupHandler: SingupHandler = async (req, res, next) => {
-  console.log("req.body");
-  console.log(req.body);
+  if (req.file) {
+    saveFiles("images/profiles", req.file);
+  }
 
   const password = generateCode(8);
   const employee = await Employee.create({
@@ -19,12 +22,14 @@ export const SignupHandler: SingupHandler = async (req, res, next) => {
     area: req.body.area,
     role: req.body.role,
     password: await hashPwd(password),
+    profileImage: req.file && `media/images/profiles/${req.file?.filename}`,
   });
 
-  if (!employee)
+  if (!employee) {
     return next(
-      new Error("Something want wrong while trying add new employee")
+      new BadRequestError("Something want wrong while trying add new employee")
     );
+  }
 
   sendMail({
     to: employee.email,

@@ -5,6 +5,7 @@ import { globalValidatorMiddleware } from "../../middleware/globalValidator.midd
 
 export const updateRole = [
   header("authorization").exists().withMessage("token required"),
+  body("_id").isString(),
   body("label").isString(),
   body("permissions").isArray(),
   body("permissions.*")

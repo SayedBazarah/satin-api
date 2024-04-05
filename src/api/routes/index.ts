@@ -2,11 +2,7 @@ import { Router } from "express";
 import { AuthRoute } from "./auth.route";
 import { RoleRoute } from "./role.route";
 import { EmployeeRoute } from "./employee.route";
-import {
-  profileImagePath,
-  uploadEmployeeResourses,
-  uploadProductsResourses,
-} from "../utils/multer";
+import { globalUploadMiddleware } from "../middleware/global-upload.middleware";
 
 // Main: /api
 
@@ -19,13 +15,21 @@ router.use("/role", RoleRoute);
 
 router.post(
   "/test",
-  uploadProductsResourses.single("image"),
+  globalUploadMiddleware().any(),
   (req, res, next) => {
-    console.log("req.file?.path");
+    console.log("req.file");
     console.log(req.file);
-    console.log(req.file?.path);
-    console.log("profileImagePath");
-    console.log(profileImagePath);
+    console.log("req.body");
+    console.log(req.body);
+
+    return next();
+  },
+  globalUploadMiddleware().single("image"),
+  (req, res, next) => {
+    console.log("req.file");
+    console.log(req.file);
+    console.log("req.body");
+    console.log(req.body);
 
     res.send("TEST ENDPOINT");
   }

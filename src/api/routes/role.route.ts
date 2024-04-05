@@ -13,7 +13,9 @@ router
   .route("/")
   .get(tokenValidator, controllers.GetRoles)
   .post(val.createRole, controllers.CreateRole)
-  .put(val.updateRole, controllers.UpdateRole)
-  .delete(val.deleteRole, controllers.DeleteRole);
+  .patch(val.updateRole, controllers.UpdateRole);
+
+router.delete("/delete/rows", val.deleteRoles, controllers.DeleteRoles);
+router.delete("/delete/:id", val.deleteRole, controllers.DeleteRole);
 
 export { router as RoleRoute };

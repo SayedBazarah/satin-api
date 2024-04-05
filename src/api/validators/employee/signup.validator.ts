@@ -1,4 +1,4 @@
-import { check } from "express-validator";
+import { body } from "express-validator";
 import { globalValidatorMiddleware } from "../../middleware/globalValidator.middleware";
 import { Employee } from "../../modals/employee.model";
 import { Role } from "../../modals/roles.model";
@@ -11,8 +11,8 @@ export const signup = [
     console.log(req.files);
     next();
   },
-  check("name").exists(),
-  check("email")
+  body("name").exists(),
+  body("email")
     .custom(async (value) => {
       const employee = await Employee.findOne({ email: value });
       console.log(employee);
@@ -23,11 +23,10 @@ export const signup = [
     .trim()
     .toLowerCase()
     .isEmail(),
-  check("profileImage").isString(),
-  check("state").isString(),
-  check("phone").isString(),
-  check("area").isString(),
-  check("role")
+  body("state").isString(),
+  body("phone").isString(),
+  body("area").isString(),
+  body("role")
     .isString()
     .custom(async (value) => {
       const role = await Role.findOne({ _id: value });

@@ -24,3 +24,6 @@ export interface UpdateRoleHandler
 
 export interface DeleteRoleHandler
   extends RequestHandler<{ id: string }, SuccessResponse> {}
+
+export interface DeleteRolesHandler
+  extends RequestHandler<unknown, SuccessResponse> {}

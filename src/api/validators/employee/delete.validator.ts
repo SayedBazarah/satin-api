@@ -7,8 +7,3 @@ export const deleteEmployee = [
   param("id"),
   globalValidatorMiddleware,
 ];
-export const deleteEmployees = [
-  header("authorization").exists().withMessage("Access token required"),
-  body("employees").isArray(),
-  globalValidatorMiddleware,
-];
