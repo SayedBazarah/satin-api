@@ -12,19 +12,29 @@ import { checkEnvVariables } from "./api/config/env";
 require("dotenv").config();
 
 checkEnvVariables();
+
 const app = express();
 
 app.use(
   cors({
-    origin: "*", // Replace with your allowed origin
+    origin: ["http://localhost:8083", "http://localhost:8081"], // Replace with your allowed origin
     credentials: true,
   })
 );
 
+app.all("*", function (req, res, next) {
+  next();
+});
 app.use(morgan("dev"));
 app.use(helmet());
-app.use(express.json({ limit: "10mb" }));
+app.use(express.json({ limit: "1mb" }));
+
 app.use("/media", express.static(path.join(process.cwd(), "media")));
+
+app.get("media/:imageName", (req, res, next) => {
+  res.set("Cross-Origin-Resource-Policy", "same-origin");
+  return res.sendFile(`${__dirname}/images/${req.params.imageName}`);
+});
 
 app.use("/healthcheck", (req, res) =>
   res.json({

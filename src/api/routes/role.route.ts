@@ -9,6 +9,7 @@ const router = Router();
 //endpoint: /api/roles
 
 router.get("/permissions", controllers.GetPermissions);
+
 router
   .route("/")
   .get(tokenValidator, controllers.GetRoles)

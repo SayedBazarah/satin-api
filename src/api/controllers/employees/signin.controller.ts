@@ -21,6 +21,7 @@ export const SigninHandler: SinginHandler = async (req, res, next) => {
     profileImage: employee?.profileImage || "",
   });
   employee.token = token;
+  employee.ipAddress = req.ip || employee.ipAddress;
   await employee.save();
 
   res.json({

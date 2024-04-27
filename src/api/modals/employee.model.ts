@@ -6,6 +6,7 @@ export interface IEmployee {
   email: string;
   phone: string;
   password?: string;
+  ipAddress: string;
   profileImage?: string;
   state?: string;
   area?: string;
@@ -53,6 +54,7 @@ export const EmployeeSchema = new Schema<IEmployee>(
     token: String,
     state: String,
     area: String,
+    ipAddress: String,
     branch: String,
     role: {
       type: Types.ObjectId,

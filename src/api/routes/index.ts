@@ -1,38 +1,36 @@
 import { Router } from "express";
+
 import { AuthRoute } from "./auth.route";
 import { RoleRoute } from "./role.route";
+import { UserRoute } from "./user.route";
+import { ConfigRoute } from "./config.route";
+import { GeneralRoute } from "./general.route";
+import { ProductRoute } from "./products.route";
 import { EmployeeRoute } from "./employee.route";
+
 import { globalUploadMiddleware } from "../middleware/global-upload.middleware";
+import { CategoryRoute } from "./category.route";
 
 // Main: /api
 
 const router = Router();
 router.use("/auth", AuthRoute);
-router.use("/employee", EmployeeRoute);
 router.use("/role", RoleRoute);
+router.use("/user", UserRoute);
+router.use("/config", ConfigRoute);
+router.use("/general", GeneralRoute);
+router.use("/product", ProductRoute);
+router.use("/category", CategoryRoute);
+router.use("/employee", EmployeeRoute);
 
 // ---------------------------------------
 
-router.post(
-  "/test",
-  globalUploadMiddleware().any(),
-  (req, res, next) => {
-    console.log("req.file");
-    console.log(req.file);
-    console.log("req.body");
-    console.log(req.body);
+router.get("/test", globalUploadMiddleware().any(), (req, res, next) => {
+  console.log("req.ip");
+  console.log(req.ip);
+  console.log(req.ips);
 
-    return next();
-  },
-  globalUploadMiddleware().single("image"),
-  (req, res, next) => {
-    console.log("req.file");
-    console.log(req.file);
-    console.log("req.body");
-    console.log(req.body);
-
-    res.send("TEST ENDPOINT");
-  }
-);
+  res.status(200).send("TEST ENDPOINT");
+});
 
 export default router;

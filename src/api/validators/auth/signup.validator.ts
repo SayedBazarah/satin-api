@@ -1,10 +1,10 @@
-import { body } from "express-validator";
+import { body, header } from "express-validator";
 import { globalValidatorMiddleware } from "../../middleware/globalValidator.middleware";
 import { Employee } from "../../modals/employee.model";
-import { isObjectIdOrHexString } from "mongoose";
 import { Role } from "../../modals/roles.model";
 
 export const signup = [
+  header("authorization").exists(),
   body("name").exists(),
   body("email")
     .custom(async (value) => {

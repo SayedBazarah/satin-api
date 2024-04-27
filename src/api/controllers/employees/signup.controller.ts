@@ -1,11 +1,10 @@
-import mongoose from "mongoose";
 import { Employee } from "../../modals/employee.model";
 import { SingupHandler } from "../../types/enpoints/auth.endpoints";
 import { hashPwd } from "../../utils/bcrypt";
 import { generateCode } from "../../utils/crypto";
 import { sendMail } from "../../utils/mail";
 import { forgetPasswordTemplate } from "../../utils/emailTemplates";
-import { removeFiles, saveFiles } from "../../utils/file";
+import { saveFiles } from "../../utils/file";
 import { BadRequestError } from "../../errors/bad-request-error";
 
 export const SignupHandler: SingupHandler = async (req, res, next) => {
@@ -15,6 +14,7 @@ export const SignupHandler: SingupHandler = async (req, res, next) => {
 
   const password = generateCode(8);
   const employee = await Employee.create({
+    ipAddress: req.ip,
     name: req.body.name,
     email: req.body.email,
     state: req.body.state,

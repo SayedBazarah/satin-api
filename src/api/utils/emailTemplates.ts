@@ -85,7 +85,7 @@ export const emailVerificationTemplate = (code: string) => {
                             line-height: 1.375rem;
                           "
                         >
-                          To start using SpaceMatch, click the verify
+                          To start using ScaleUp, click the verify
                           email button below.
                         </p>
                         <p style="padding-bottom: 16px">
@@ -126,8 +126,7 @@ export const emailVerificationTemplate = (code: string) => {
                         />
 
                         <p style="padding: 0 26px; color: #637381">
-                          SpaceMatch is an online platform for creating and
-                          managing your space all in the browser.
+                        ScaleUp is an online platform for shoping
                         </p>
                       </div>
                     </div>
@@ -279,8 +278,7 @@ export const forgetPasswordTemplate = (code: string) => {
                         />
 
                         <p style="padding: 0 26px; color: #637381">
-                          SpaceMatch is an online platform for creating and
-                          managing your space all in the browser.
+                        ScaleUp is an online platform for Shoping.
                         </p>
                       </div>
                     </div>

@@ -20,15 +20,27 @@ export const removeFiles = (...filePaths: (string | undefined)[]) => {
   });
 };
 
+export const removeFolders = (...filePaths: (string | undefined)[]) => {
+  filePaths.forEach((filePath) => {
+    if (filePath) fs.rmdirSync(path.join(process.cwd(), filePath));
+  });
+};
+
 export const createMediaFolders = () => {
   const folderPaths = [
     path.join(process.cwd(), "media"),
     path.join(process.cwd(), "media/images"),
     path.join(process.cwd(), "media/images/profiles"),
     path.join(process.cwd(), "media/images/products"),
+    path.join(process.cwd(), "media/images/categories"),
   ];
 
   for (const folder of folderPaths) {
     if (!fs.existsSync(folder)) fs.mkdirSync(folder);
   }
+};
+
+export const createProductFolder = (slug: string) => {
+  const filePath = path.join(process.cwd(), `media/images/products/${slug}`);
+  if (!fs.existsSync(filePath)) fs.mkdirSync(filePath);
 };

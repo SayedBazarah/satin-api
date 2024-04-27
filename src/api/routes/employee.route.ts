@@ -1,4 +1,4 @@
-import { NextFunction, Request, Response, Router } from "express";
+import { Router } from "express";
 
 import * as controllers from "../controllers/employees";
 import * as val from "../validators/employee";
@@ -6,7 +6,7 @@ import { globalUploadMiddleware } from "../middleware/global-upload.middleware";
 
 const router = Router();
 
-//endpoint: /api/employee
+// endpoint: /api/employee
 
 router
   .route("/")
