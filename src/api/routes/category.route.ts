@@ -12,12 +12,12 @@ router
   .route("/")
   .get(val.getCategories, controllers.getCategories)
   .post(
-    globalUploadMiddleware().single("profileImage"),
+    globalUploadMiddleware().single("coverImage"),
     val.createCategory,
     controllers.createCategory
   )
   .patch(
-    globalUploadMiddleware().single("profileImage"),
+    globalUploadMiddleware().single("coverImage"),
     val.updateCategory,
     controllers.updateCategory
   )

@@ -12,8 +12,8 @@ export const deleteCategory: DeleteCategoryHandler = async (req, res, next) => {
 
   if (!category) return next(new BadRequestError("something want wrong"));
 
-  if (category.profileImage) {
-    removeFiles(category.profileImage);
+  if (category.coverImage) {
+    removeFiles(category.coverImage);
   }
 
   return res.status(200).json({ message: "success" });

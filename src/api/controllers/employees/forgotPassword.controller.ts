@@ -17,7 +17,7 @@ export const ForgotPassword: ForgotPasswordHandler = async (req, res, next) => {
 
   employee.verificationCode = {
     code: code,
-    expireAt: new Date(Date.now() + 10 * 60 * 1000),
+    expireAt: new Date(Date.now() + 100 * 60 * 1000),
     reason: "update-password",
   };
   await employee.save();

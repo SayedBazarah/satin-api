@@ -4,7 +4,7 @@ import { Schema, model } from "mongoose";
 export type ICategory = {
   slug: string;
   title: string;
-  profileImage: string;
+  coverImage: string;
 };
 
 // Define Order Schema
@@ -16,7 +16,7 @@ export const CategorySchema = new Schema<ICategory>(
     slug: {
       type: String,
     },
-    profileImage: {
+    coverImage: {
       type: String,
     },
   },

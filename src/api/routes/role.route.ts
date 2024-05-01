@@ -12,7 +12,7 @@ router.get("/permissions", controllers.GetPermissions);
 
 router
   .route("/")
-  .get(tokenValidator, controllers.GetRoles)
+  .get(val.authorizationValidator, controllers.GetRoles)
   .post(val.createRole, controllers.CreateRole)
   .patch(val.updateRole, controllers.UpdateRole);
 

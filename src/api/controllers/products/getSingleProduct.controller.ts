@@ -9,18 +9,11 @@ export const GetSingleProduct: GetSingleProductHandler = async (
   next
 ) => {
   try {
-    const product = await Product.aggregate([
+    const products = await Product.aggregate([
       {
         $match: { slug: req.params.slug },
       },
-      {
-        $lookup: {
-          from: "category", // Name of the collection to join with
-          localField: "category", // Field from the current collection
-          foreignField: "_id", // Field from the collection to join with
-          as: "category", // Name of the field to add to each document
-        },
-      },
+
       {
         $project: {
           _id: 1,
@@ -61,7 +54,12 @@ export const GetSingleProduct: GetSingleProductHandler = async (
         },
       },
     ]);
-    return res.status(200).json({ product: product[0] });
+
+    const product = await Product.populate(products[0], {
+      path: "category",
+      model: "category",
+    });
+    return res.status(200).json({ product });
   } catch (error) {
     return next(new BadRequestError(`${error}`));
   }

@@ -10,7 +10,7 @@ const router = Router();
 
 router
   .route("/")
-  .get(val.tokenValidator, controllers.AllEmployeesHandler)
+  .get(val.authorizationValidator, controllers.AllEmployeesHandler)
   .patch(
     globalUploadMiddleware().single("profileImage"),
     val.update,

@@ -4,6 +4,9 @@ import { UpdateCategoryHandler } from "../../types/enpoints/category.endpoints";
 import { removeFiles, saveFiles } from "../../utils/file";
 
 export const updateCategory: UpdateCategoryHandler = async (req, res, next) => {
+  console.log("req.file");
+  console.log(req.file);
+
   const category = await Category.findOneAndUpdate(
     {
       _id: req.body._id,
@@ -13,7 +16,7 @@ export const updateCategory: UpdateCategoryHandler = async (req, res, next) => {
       ...(req.body.slug && {
         slug: (req.body.slug as string).replace(/ /g, "-").toLowerCase(),
       }),
-      profileImage: req.file && `media/images/categories/${req.file?.filename}`,
+      coverImage: req.file && `media/images/categories/${req.file?.filename}`,
     },
     {
       runValidators: true,
@@ -23,7 +26,7 @@ export const updateCategory: UpdateCategoryHandler = async (req, res, next) => {
   if (!category) return next(new BadRequestError("something want wrong"));
 
   if (req.file) {
-    removeFiles(category.profileImage);
+    removeFiles(category.coverImage);
     saveFiles("images/categories", req.file);
   }
 
