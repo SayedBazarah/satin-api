@@ -17,10 +17,16 @@ router
     controllers.UpdateEmployee
   )
   .delete(val.deleteEmployees, controllers.DeleteEmployees);
+
 router
   .route("/delete/:id")
   .delete(val.deleteEmployee, controllers.DeleteEmployee);
+
 router.route("/ids").get(val.tokenValidator, controllers.AllEmployeesIdHandler);
+
+router
+  .route("/subscribe-notification/:id")
+  .patch(val.subscribeValidator, controllers.NotificationSubscribe);
 
 router.route("/single/:id").get(val.me, controllers.GetEmployee);
 

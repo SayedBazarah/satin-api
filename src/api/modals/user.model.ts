@@ -1,6 +1,15 @@
 import { Schema, Types, model } from "mongoose";
 import { IProduct } from "./product.model";
 
+export interface INotification {
+  title: string;
+  category: string;
+  isUnRead?: boolean;
+}
+
+export const NotificationCategories = {
+  ORDER: "order",
+};
 export interface IUser {
   name: string;
   email: string;
@@ -22,6 +31,8 @@ export interface IUser {
       | "update-password-verified"
       | "signup";
   };
+  notification?: INotification[];
+  notificationSubscription: object;
 }
 
 export type AccessableUserData = {
@@ -32,6 +43,7 @@ export type AccessableUserData = {
   favorite: string[] | IProduct[];
   cart: string;
   profileImage?: string;
+  notification?: INotification[];
 };
 
 export const UserSchema = new Schema<IUser>(
@@ -55,6 +67,21 @@ export const UserSchema = new Schema<IUser>(
       expireAt: Date,
       reason: String,
     },
+    notification: {
+      type: Array.of(
+        new Schema<INotification>(
+          {
+            title: String,
+            category: String,
+            isUnRead: { type: Boolean, default: false },
+          },
+          {
+            timestamps: true,
+          }
+        )
+      ),
+    },
+    notificationSubscription: Object,
   },
   { timestamps: true, collection: "user" }
 );

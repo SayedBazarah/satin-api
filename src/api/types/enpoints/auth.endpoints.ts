@@ -41,6 +41,14 @@ export interface GetAllEmployeesHandler
 
 export interface UpdateEmployeeHandler
   extends RequestHandler<unknown, SuccessResponse> {}
+
+export interface NotificationSubscribeHandler
+  extends RequestHandler<
+    {
+      id: string;
+    },
+    SuccessResponse
+  > {}
 export interface DeleteEmployeeHandler
   extends RequestHandler<{ id: string }, SuccessResponse> {}
 export interface DeleteEmployeesHandler

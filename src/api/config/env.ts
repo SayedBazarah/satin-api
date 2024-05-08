@@ -5,6 +5,8 @@ config({ path: ".env" });
 export const env = {
   port: +(process.env.DEV_PORT || 3000) as number,
   environment: process.env.NODE_ENV?.trim() || "development",
+  vapidPublicKey: process.env.VAPID_PUBLICKEY as string,
+  vapidPrivateKey: process.env.VAPID_PRIVATEKEY as string,
   frontUrl: process.env.FRONT_URL as string,
   apiUrl: process.env.API_URL as string,
   mongoDb: {

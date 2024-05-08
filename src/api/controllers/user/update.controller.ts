@@ -1,12 +1,11 @@
-import { Employee } from "../../modals/employee.model";
+import { User } from "../../modals/user.model";
 import { BadRequestError } from "../../errors/bad-request-error";
-import { UpdateEmployeeHandler } from "../../types/enpoints/auth.endpoints";
 
-import { env } from "../../config/env";
 import { removeFiles, saveFiles } from "../../utils/file";
+import { UpdateUserHandler } from "../../types/enpoints/user.endpoints";
 
-export const UpdateEmployee: UpdateEmployeeHandler = async (req, res, next) => {
-  const employee = await Employee.findOneAndUpdate(
+export const UpdateUser: UpdateUserHandler = async (req, res, next) => {
+  const user = await User.findOneAndUpdate(
     { _id: req.body._id },
     {
       name: req.body.name,
@@ -20,16 +19,16 @@ export const UpdateEmployee: UpdateEmployeeHandler = async (req, res, next) => {
     { runValidators: true }
   );
 
-  if (!employee)
+  if (!user)
     return next(new BadRequestError("something want wrong while updating."));
 
   if (req.file) {
-    if (employee.profileImage) {
-      removeFiles(employee.profileImage);
+    if (user.profileImage) {
+      removeFiles(user.profileImage);
     }
     saveFiles("images/profiles", req.file);
   }
-  res.json({
+  res.status(200).json({
     message: "success",
   });
 };

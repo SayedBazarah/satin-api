@@ -11,7 +11,7 @@ export const AuthMe: GetEmployeeHandler = async (req, res, next) => {
     return next(new Error("token expired"));
   }
 
-  res.json({
+  res.status(200).json({
     user: {
       _id: employee._id,
       email: employee.email,
@@ -22,6 +22,7 @@ export const AuthMe: GetEmployeeHandler = async (req, res, next) => {
       phone: employee.phone,
       area: employee.area,
       state: employee.state,
+      notification: employee.notification,
     },
   });
 };

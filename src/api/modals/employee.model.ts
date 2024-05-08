@@ -1,4 +1,5 @@
 import { ObjectId, Schema, Types, model } from "mongoose";
+import { INotification } from "./user.model";
 
 export interface IEmployee {
   id: string;
@@ -23,6 +24,8 @@ export interface IEmployee {
   branch?: string;
   token: string;
   role?: ObjectId;
+  notification: INotification[];
+  notificationSubscription?: object;
 }
 
 export type AccessableEmployeeData = {
@@ -36,6 +39,7 @@ export type AccessableEmployeeData = {
   area?: string;
   branch?: string;
   role?: ObjectId;
+  notification?: INotification[];
 };
 
 export const EmployeeSchema = new Schema<IEmployee>(
@@ -60,6 +64,21 @@ export const EmployeeSchema = new Schema<IEmployee>(
       type: Types.ObjectId,
       ref: "role",
     },
+    notification: {
+      type: Array.of(
+        new Schema<INotification>(
+          {
+            title: String,
+            category: String,
+            isUnRead: { type: Boolean, default: true },
+          },
+          {
+            timestamps: true,
+          }
+        )
+      ),
+    },
+    notificationSubscription: Object,
   },
   { timestamps: true, collection: "employee" }
 );

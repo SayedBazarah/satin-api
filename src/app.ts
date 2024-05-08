@@ -17,14 +17,17 @@ const app = express();
 
 app.use(
   cors({
-    origin: ["http://localhost:8083", "http://localhost:8081"], // Replace with your allowed origin
+    origin: [
+      "http://localhost:8083",
+      "http://localhost:8081",
+      "https://ecommerce-demo-client.vercel.app",
+      "https://ecommerce-demo-beta.vercel.app",
+    ],
+    allowedHeaders: ["Content-Type", "Authorization"],
     credentials: true,
   })
 );
 
-app.all("*", function (req, res, next) {
-  next();
-});
 app.use(morgan("dev"));
 app.use(helmet());
 app.use(express.json({ limit: "1mb" }));

@@ -9,3 +9,4 @@ export * from "./update.validator";
 export * from "./delete.validator";
 export * from "./deleteEmployees.validator";
 export * from "./authorizationValidator.validator";
+export * from "./subscribe.validation";

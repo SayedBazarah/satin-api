@@ -54,7 +54,7 @@ export interface IOrder {
   history: IOrderHistory;
   customer: string | IUser;
   delivery: IOrderDelivery;
-  items: IProduct[];
+  items: IOrderProductItem[];
 }
 
 export const OrderStatus = {

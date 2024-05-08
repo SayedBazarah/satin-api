@@ -8,7 +8,6 @@ export const GetOrderDetails: GetOrderDetailsHandler = async (
   next
 ) => {
   //   const orders = await Order.find({});
-  console.log(req.params.id);
   const orders = await Order.aggregate([
     {
       $match: { _id: new mongoose.Types.ObjectId(req.params.id) },
@@ -19,6 +18,5 @@ export const GetOrderDetails: GetOrderDetailsHandler = async (
       },
     },
   ]);
-  console.log(orders);
   return res.status(200).json({ order: orders[0] });
 };

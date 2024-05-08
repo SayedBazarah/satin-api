@@ -5,3 +5,4 @@ export * from "./updatePassword.controller";
 export * from "./tokenValidator.controller";
 export * from "./update.controller";
 export * from "./authMe.controller";
+export * from "./notification-subscribe.controller";

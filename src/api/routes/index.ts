@@ -11,6 +11,8 @@ import { CategoryRoute } from "./category.route";
 import { EmployeeRoute } from "./employee.route";
 
 import { globalUploadMiddleware } from "../middleware/global-upload.middleware";
+import { CreateEmployeeNotification } from "../controllers/notification/create-notification";
+import { NotificationCategories } from "../modals/user.model";
 
 // Main: /api
 
@@ -27,11 +29,11 @@ router.use("/employee", EmployeeRoute);
 
 // ---------------------------------------
 
-router.get("/test", globalUploadMiddleware().any(), (req, res, next) => {
-  console.log("req.ip");
-  console.log(req.ip);
-  console.log(req.ips);
-
+router.get("/test", globalUploadMiddleware().any(), async (req, res, next) => {
+  await CreateEmployeeNotification({
+    category: NotificationCategories.ORDER,
+    title: "testing functions",
+  });
   res.status(200).send("TEST ENDPOINT");
 });
 
