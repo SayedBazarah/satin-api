@@ -23,7 +23,7 @@ export const ForgotPassword: ForgotPasswordHandler = async (req, res, next) => {
   await employee.save();
 
   const token = Buffer.from(`${employee.email}:${code}`).toString("base64");
-  const link = `${env.frontUrl}/auth/jwt/reset-password?token=${token}`;
+  const link = `${env.dashboardUrl}/auth/jwt/reset-password?token=${token}`;
 
   sendMail({
     to: employee.email,
