@@ -24,6 +24,7 @@ router
 
 router.route("/ids").get(val.tokenValidator, controllers.AllEmployeesIdHandler);
 
+// EMployee have only one device subscribe
 router
   .route("/subscribe-notification/:id")
   .patch(val.subscribeValidator, controllers.NotificationSubscribe);
