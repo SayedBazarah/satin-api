@@ -4,6 +4,7 @@ import { env } from "./api/config/env";
 import { createMediaFolders } from "./api/utils/file";
 import app from "./app";
 import { createServer } from "http";
+import { OpenMongoDBConnection } from "./api/utils/mongoDb";
 
 const httpServer = createServer(app);
 
@@ -13,8 +14,7 @@ webpush.setVapidDetails(
   env.vapidPrivateKey
 );
 
-dbConnection(env.mongoDb.url);
-
+OpenMongoDBConnection();
 const port = env.port || 3000;
 httpServer.listen(port, () => {
   createMediaFolders();
