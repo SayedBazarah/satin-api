@@ -18,11 +18,16 @@ const app = express();
 app.use(
   cors({
     origin: [
+<<<<<<< HEAD
       "http://localhost:8083",
       "http://localhost:8080",
       "http://localhost:8081",
       "https://ecommerce-demo-client.vercel.app",
       "https://ecommerce-demo-beta.vercel.app",
+=======
+      "https://satinstore.shop",
+      "https://dashboard.satinstore.shop",
+>>>>>>> 9d34dd7 (Update creating admin in first lunch)
     ],
     allowedHeaders: ["Content-Type", "Authorization"],
     credentials: true,

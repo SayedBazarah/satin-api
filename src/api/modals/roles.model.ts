@@ -7,6 +7,7 @@ export interface IRole {
 }
 
 export enum PERMISSIONS {
+  SUPER = "Super",
   REPORTS = "Reports",
   PRODUCTS = "Products",
   CATEGORIES = "Categories",
