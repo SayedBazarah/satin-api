@@ -17,6 +17,12 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: ${{ matrix.node-version }}
+<<<<<<< HEAD
           cache: "npm"
       - run: |
           npm install
+=======
+          cache: 'npm'
+      - run: npm install
+      
+>>>>>>> 6974ed7 (update .yml)
