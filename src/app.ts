@@ -18,10 +18,8 @@ const app = express();
 app.use(
   cors({
     origin: [
-      "http://localhost:8083",
-      "http://localhost:8081",
-      "https://ecommerce-demo-client.vercel.app",
-      "https://ecommerce-demo-beta.vercel.app",
+      "https://satinstore.shop",
+      "https://dashboard.satinstore.shop",
     ],
     allowedHeaders: ["Content-Type", "Authorization"],
     credentials: true,
