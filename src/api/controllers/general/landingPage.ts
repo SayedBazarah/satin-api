@@ -170,7 +170,7 @@ export const LandingPage: LandingPageHandle = async (req, res, next) => {
         slug: 1,
         title: 1,
         coverImage: {
-          $concat: [`${env.apiUrl}/`, "$profileImage"],
+          $concat: [`${env.apiUrl}/`, "$coverImage"],
         },
         products: 1,
       },
