@@ -17,10 +17,7 @@ const app = express();
 
 app.use(
   cors({
-    origin: [
-      "https://satinstore.shop",
-      "https://dashboard.satinstore.shop",
-    ],
+    origin: ["https://satinstore.shop", "https://dashboard.satinstore.shop"],
     allowedHeaders: ["Content-Type", "Authorization"],
     credentials: true,
   })
