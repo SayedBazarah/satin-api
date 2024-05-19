@@ -4,12 +4,9 @@ import { UpdateCategoryHandler } from "../../types/enpoints/category.endpoints";
 import { removeFiles, saveFiles } from "../../utils/file";
 
 export const updateCategory: UpdateCategoryHandler = async (req, res, next) => {
-  console.log("req.file");
-  console.log(req.file);
-
   const category = await Category.findOneAndUpdate(
     {
-      _id: req.body._id,
+      _id: req.params.id,
     },
     {
       ...req.body,

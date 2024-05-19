@@ -22,7 +22,10 @@ export interface GetCategoryHandler
   extends RequestHandler<{ id: string }, GetCategoriesResponse> {}
 
 export interface UpdateCategoryHandler
-  extends RequestHandler<unknown, SuccessResponse> {}
+  extends RequestHandler<{ id: string }, SuccessResponse> {}
 
 export interface DeleteCategoryHandler
+  extends RequestHandler<{ id: string }, SuccessResponse> {}
+
+export interface DeleteCategoriesHandler
   extends RequestHandler<unknown, SuccessResponse> {}

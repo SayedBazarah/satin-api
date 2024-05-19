@@ -31,8 +31,6 @@ export const ForgotPassword: ForgotPasswordHandler = async (req, res, next) => {
     html: forgetPasswordTemplate(link),
   });
 
-  console.log("ForgotPassword: employee");
-  console.log(employee);
   res.json({
     message: "success",
   });

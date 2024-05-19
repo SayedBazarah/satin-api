@@ -19,4 +19,10 @@ router
   .route("/token-validator")
   .get(val.tokenValidator, controllers.tokenValidator);
 
+router.patch(
+  "/change-password",
+  val.updatePassword,
+  controllers.ChangePassword
+);
+
 export { router as AuthRoute };

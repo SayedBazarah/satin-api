@@ -5,7 +5,7 @@ export const AuthMe: GetEmployeeHandler = async (req, res, next) => {
   const employee = await Employee.findOne({
     token: req.headers["authorization"]?.split(" ")[1],
   }).populate("role");
-  console.log(employee);
+
   if (!employee) {
     res.status(401);
     return next(new Error("token expired"));

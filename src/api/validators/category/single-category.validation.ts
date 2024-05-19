@@ -1,8 +1,8 @@
-import { body, header, param } from "express-validator";
+import { header, param } from "express-validator";
 import { globalValidatorMiddleware } from "../../middleware/globalValidator.middleware";
 
-export const DeleteCategories = [
+export const SingleCategory = [
   header("authorization"),
-  body("categories").isArray().exists(),
+  param("id"),
   globalValidatorMiddleware,
 ];

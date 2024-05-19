@@ -4,6 +4,7 @@ import { globalValidatorMiddleware } from "../../middleware/globalValidator.midd
 export const updatePassword = [
   header("authorization").exists(),
   body("password").exists().isString(),
+  body("newPassword").exists().isString(),
   body("confirm").exists().isString(),
   globalValidatorMiddleware,
 ];

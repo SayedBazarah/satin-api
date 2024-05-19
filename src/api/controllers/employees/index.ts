@@ -10,4 +10,5 @@ export * from "./authMe.controller";
 export * from "./AllEmployeeIds.controller";
 export * from "./delete.controller";
 export * from "./deletes.controller";
+export * from "./change-password.controller";
 export * from "./notification-subscribe.controller";

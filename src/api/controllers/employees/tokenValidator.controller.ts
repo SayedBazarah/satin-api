@@ -10,9 +10,6 @@ export const tokenValidator: tokenValidatorHandler = async (req, res, next) => {
     .toString()
     .split(":");
 
-  console.log("email ------------------------");
-  console.log(email);
-  console.log(code);
   const employee = await Employee.findOne({ email });
 
   if (

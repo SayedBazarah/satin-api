@@ -7,7 +7,7 @@ import { DeleteCategoryHandler } from "../../types/enpoints/category.endpoints";
 
 export const deleteCategory: DeleteCategoryHandler = async (req, res, next) => {
   const category = await Category.findOneAndDelete({
-    _id: req.body._id,
+    _id: req.params.id,
   });
 
   if (!category) return next(new BadRequestError("something want wrong"));

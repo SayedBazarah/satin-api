@@ -1,10 +1,10 @@
-import { body, header } from "express-validator";
+import { body, header, param } from "express-validator";
 import { globalValidatorMiddleware } from "../../middleware/globalValidator.middleware";
 import { Category } from "../../modals/category.model";
 
 export const updateCategory = [
   header("authorization"),
-  body("_id"),
+  param("id"),
   body("title"),
   body("slug"),
   globalValidatorMiddleware,

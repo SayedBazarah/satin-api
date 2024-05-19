@@ -16,13 +16,23 @@ export const saveFiles = (
 
 export const removeFiles = (...filePaths: (string | undefined)[]) => {
   filePaths.forEach((filePath) => {
-    if (filePath) fs.unlinkSync(path.join(process.cwd(), filePath));
+    if (filePath)
+      try {
+        fs.unlinkSync(path.join(process.cwd(), filePath));
+      } catch (error) {
+        console.error(error);
+      }
   });
 };
 
 export const removeFolders = (...filePaths: (string | undefined)[]) => {
   filePaths.forEach((filePath) => {
-    if (filePath) fs.rmdirSync(path.join(process.cwd(), filePath));
+    if (filePath)
+      try {
+        fs.rmdirSync(path.join(process.cwd(), filePath));
+      } catch (error) {
+        console.error(error);
+      }
   });
 };
 
