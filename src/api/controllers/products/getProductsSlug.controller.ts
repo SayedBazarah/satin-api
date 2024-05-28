@@ -9,10 +9,13 @@ export const getProductsSlug: GetProductsSlugHandler = async (
   next
 ) => {
   try {
+    const locale = req.headers["accept-language"];
+
     const slugs = await Product.aggregate([
       {
         $match: {
           publish: true,
+          locale,
         },
       },
       {

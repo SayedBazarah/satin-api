@@ -10,6 +10,7 @@ export const GetTagProduct: GetTagProductsHandler = async (req, res, next) => {
     const regex = new RegExp(searchTerm.replace(/-/g, " "), "i");
 
     const products = await Product.aggregate([
+      { $match: { locale: req.headers["accept-language"] } },
       {
         $unwind: "$tags", // Deconstruct the tags array
       },

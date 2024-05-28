@@ -2,6 +2,7 @@ import { Schema, Types, ObjectId, model } from "mongoose";
 import { ICategory } from "./category.model";
 
 export interface IProduct {
+  locale: string;
   _id: string;
   sku: string;
   name: string;
@@ -64,6 +65,7 @@ export interface AccessableProductData {
 
 const ProductSchema = new Schema<IProduct>(
   {
+    locale: { type: String },
     name: { type: String },
     sku: { type: String },
     code: { type: String },

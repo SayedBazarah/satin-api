@@ -5,6 +5,9 @@ import { GetCategoriesHandler } from "../../types/enpoints/category.endpoints";
 export const getCategories: GetCategoriesHandler = async (req, res, next) => {
   const categories = await Category.aggregate([
     {
+      $match: { locale: req.headers["accept-language"] || "ar" },
+    },
+    {
       $lookup: {
         from: "product", // Name of the collection to join with
         localField: "_id", // Field from the local collection (categories)
@@ -63,6 +66,9 @@ export const getCategories: GetCategoriesHandler = async (req, res, next) => {
       $project: {
         slug: 1,
         title: 1,
+        icon: {
+          $concat: [`${env.apiUrl}/`, "$icon"],
+        },
         coverImage: {
           $concat: [`${env.apiUrl}/`, "$coverImage"],
         },
@@ -70,6 +76,5 @@ export const getCategories: GetCategoriesHandler = async (req, res, next) => {
       },
     },
   ]);
-
   res.status(200).json({ categories });
 };

@@ -7,6 +7,7 @@ export const GetNavLinks: GetNavLinksHandler = async (req, res, next) => {
     // const products = await Product.find({ tags: { $in: req.params.tag } });
 
     const products = await Product.aggregate([
+      { $match: { locale: req.headers["accept-language"] } },
       { $unwind: "$tags" }, // Deconstruct the array 'tags' into separate documents
       { $group: { _id: null, tags: { $addToSet: "$tags" } } },
       { $project: { _id: 0, tags: 1 } },

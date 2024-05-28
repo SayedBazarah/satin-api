@@ -9,9 +9,11 @@ export const GetShopProductsProduct: GetProductsListHandler = async (
   next
 ) => {
   try {
+    const locale = req.headers["accept-language"];
+
     const products = await Product.aggregate([
       {
-        $match: { publish: true },
+        $match: { publish: true, locale },
       },
       {
         $project: {

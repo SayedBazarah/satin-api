@@ -7,7 +7,10 @@ export const ProductSearch: ProductSearchHandler = async (req, res, next) => {
   try {
     const products = await Product.aggregate([
       {
-        $match: { publish: true, name: new RegExp(req.params.query, "i") },
+        $match: {
+          publish: true,
+          name: new RegExp(req.params.query, "i"),
+        },
       },
       {
         $project: {

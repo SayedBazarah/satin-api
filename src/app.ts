@@ -19,12 +19,14 @@ app.use(
   cors({
     origin: [
       "http://localhost:8083",
+      "http://localhost:8080",
       "http://localhost:8081",
       "https://ecommerce-demo-client.vercel.app",
       "https://ecommerce-demo-beta.vercel.app",
     ],
     allowedHeaders: ["Content-Type", "Authorization"],
     credentials: true,
+    preflightContinue: false,
   })
 );
 
@@ -35,7 +37,6 @@ app.use(express.json({ limit: "1mb" }));
 app.use("/media", express.static(path.join(process.cwd(), "media")));
 
 app.get("media/:imageName", (req, res, next) => {
-  res.set("Cross-Origin-Resource-Policy", "same-origin");
   return res.sendFile(`${__dirname}/images/${req.params.imageName}`);
 });
 
@@ -44,6 +45,15 @@ app.use("/healthcheck", (req, res) =>
     message: "🦄🌈✨👋🌎🌍🌏✨🌈🦄",
   })
 );
+
+// Identify customer lang
+app.use((req, res, next) => {
+  const lang = req.headers["accept-language"];
+  console.log("lang");
+  console.log(lang);
+  res.locals = { lang };
+  next();
+});
 
 app.use("/api", api);
 

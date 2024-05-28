@@ -8,11 +8,15 @@ const router = Router();
 
 //endpoint: /api/category
 
+router.get("/list", val.getCategories, controllers.getCategoriesList);
 router
   .route("/")
   .get(val.getCategories, controllers.getCategories)
   .post(
-    globalUploadMiddleware().single("coverImage"),
+    globalUploadMiddleware().fields([
+      { name: "coverImage", maxCount: 1 },
+      { name: "icon", maxCount: 1 },
+    ]),
     val.createCategory,
     controllers.createCategory
   )
@@ -22,7 +26,7 @@ router
   .route("/:id")
   .get(val.SingleCategory, controllers.getCategory)
   .patch(
-    globalUploadMiddleware().single("coverImage"),
+    globalUploadMiddleware().fields([{ name: "coverImage" }, { name: "icon" }]),
     val.updateCategory,
     controllers.updateCategory
   )

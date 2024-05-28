@@ -10,7 +10,10 @@ export const CreateProduct: CreateProductHandler = async (req, res, next) => {
 
     const slug = req.body.slug as string;
 
+    const locale = req.headers["accept-language"];
+
     await Product.create({
+      locale,
       ...req.body,
       slug: slug.toLowerCase().replace(/\ /g, "-"),
       totalSold: 0,

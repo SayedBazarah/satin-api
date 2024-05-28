@@ -6,7 +6,7 @@ import { globalUploadMiddleware } from "../middleware/global-upload.middleware";
 
 const router = Router();
 
-// endpoint: /api/general
+// endpoint: /api/common
 router.route("/landing-page").get(controllers.LandingPage);
 
 export { router as GeneralRoute };

@@ -5,6 +5,7 @@ import { GetTagsHandler } from "../../types/enpoints/product.endpoints";
 export const GetTag: GetTagsHandler = async (req, res, next) => {
   try {
     const tags = await Product.aggregate([
+      { $match: { locale: req.headers["accept-language"] } },
       { $unwind: "$tags" }, // Deconstruct the array 'tags' into separate documents
       { $group: { _id: null, tags: { $addToSet: "$tags" } } },
       { $project: { _id: 0, tags: 1 } },

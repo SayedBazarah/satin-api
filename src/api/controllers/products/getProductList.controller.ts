@@ -12,9 +12,6 @@ export const GetProductsList: GetProductsListHandler = async (
   try {
     const products = await Product.aggregate([
       {
-        $match: {},
-      },
-      {
         $lookup: {
           from: "category",
           localField: "category",
@@ -24,6 +21,7 @@ export const GetProductsList: GetProductsListHandler = async (
       },
       {
         $project: {
+          locale: 1,
           createdAt: 1,
           priceSale: 1,
           category: 1,

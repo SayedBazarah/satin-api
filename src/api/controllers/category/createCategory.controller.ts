@@ -5,17 +5,31 @@ import { saveFiles } from "../../utils/file";
 
 export const createCategory: CreateCategoryHandler = async (req, res, next) => {
   const { title, slug } = req.body;
-  console.log("req.file");
-  console.log(req.file);
+
+  const files = req.files as unknown as {
+    [key: string]: Express.Multer.File[];
+  };
+
+  const icon = files["icon"][0];
+
+  const coverImage = files["coverImage"][0];
+
+  const locale = req.headers["accept-language"];
+
+  if (!icon || !coverImage)
+    return next(new BadRequestError("icon & cover image are needed"));
+
   const category = await Category.create({
+    locale,
     title: title,
     slug: (slug as string).replace(/ /g, "-").toLowerCase(),
-    coverImage: req.file && `media/images/categories/${req.file?.filename}`,
+    coverImage: `media/images/categories/${files["coverImage"][0].filename}`,
+    icon: `media/images/categories/${files["icon"][0].filename}`,
   });
 
   if (!category) return next(new BadRequestError("something want wrong"));
 
-  if (req.file) saveFiles("images/categories", req.file);
+  saveFiles("images/categories", icon, coverImage);
 
   return res.status(201).json({ message: "success" });
 };

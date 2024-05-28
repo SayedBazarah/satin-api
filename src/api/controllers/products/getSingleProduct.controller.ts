@@ -11,7 +11,9 @@ export const GetSingleProduct: GetSingleProductHandler = async (
   try {
     const products = await Product.aggregate([
       {
-        $match: { slug: req.params.slug },
+        $match: {
+          slug: req.params.slug,
+        },
       },
 
       {
